@@ -1,0 +1,16 @@
+.gallery__custom-like {
+    display: block;
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../images/like.svg);
+    cursor: pointer;
+    transition: opacity .3s ease;
+}
+
+.gallery__checkbox:hover + .gallery__custom-like {
+    opacity: .5;
+}
+
+.gallery__checkbox:checked + .gallery__custom-like {
+    background-image: url(../../../images/like-active.svg);
+}
