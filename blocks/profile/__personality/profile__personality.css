@@ -1,0 +1,9 @@
+.profile__personality {
+  display: flex;
+}
+
+@media screen and (max-width: 700px) {
+  .profile__personality {
+    margin: 26px 0 36px;
+  }
+}
