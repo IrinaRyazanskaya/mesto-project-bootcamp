@@ -21,3 +21,5 @@
 @import url(../blocks/gallery/__place-name/gallery__place-name.css);
 @import url(../blocks/gallery/__checkbox/gallery__checkbox.css);
 @import url(../blocks/gallery/__custom-like/gallery__custom-like.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
