@@ -15,21 +15,17 @@
       </header>
       <main class="main">
         <section class="profile">
-          <div class="profile__information">
-            <img
-              class="profile__avatar"
-              src="./images/avatar.jpg"
-              alt="Аватар пользователя"
-            >
-            <div class="profile__personality">
-              <div class="profile__name-container">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <p class="profile__description">Исследователь океана</p>
-              </div>
-              <button class="profile__edit-button"></button>
-            </div>
+          <img
+            class="profile__avatar"
+            src="./images/avatar.jpg"
+            alt="Аватар пользователя"
+          >
+          <div class="profile__personality">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="button" aria-label="Изменить"></button>
+            <p class="profile__description">Исследователь океана</p>
           </div>
-          <button class="profile__add-button"></button>
+          <button class="profile__add-button" type="button" aria-label="Добавить"></button>
         </section>
         <section class="gallery">
           <ul class="gallery__list">
@@ -40,9 +36,8 @@
                 alt="Карачаевск"
               >
               <div class="gallery__information">
-                <p class="gallery__place-name">Карачаевск</p>
-                <input type="checkbox" name="like" id="like1" class="gallery__checkbox">
-                <label class="gallery__custom-like" for="like1"></label>
+                <h2 class="gallery__place-name">Карачаевск</h2>
+                <button class="gallery__like-button" type="button" aria-label="Нравится"></button>
               </div>
             </li>
             <li class="gallery__list-item">
@@ -52,9 +47,8 @@
                 alt="Гора Эльбрус"
               >
               <div class="gallery__information">
-                <p class="gallery__place-name">Гора Эльбрус</p>
-                <input type="checkbox" name="like" id="like2" class="gallery__checkbox">
-                <label class="gallery__custom-like" for="like2"></label>
+                <h2 class="gallery__place-name">Гора Эльбрус</h2>
+                <button class="gallery__like-button" type="button" aria-label="Нравится"></button>
               </div>
             </li>
             <li class="gallery__list-item">
@@ -64,9 +58,8 @@
                 alt="Домбай"
               >
               <div class="gallery__information">
-                <p class="gallery__place-name">Домбай</p>
-                <input type="checkbox" name="like" id="like3" class="gallery__checkbox">
-                <label class="gallery__custom-like" for="like3"></label>
+                <h2 class="gallery__place-name">Домбай</h2>
+                <button class="gallery__like-button" type="button" aria-label="Нравится"></button>
               </div>
             </li>
             <li class="gallery__list-item">
@@ -76,9 +69,8 @@
                 alt="Гора Эльбрус"
               >
               <div class="gallery__information">
-                <p class="gallery__place-name">Гора Эльбрус</p>
-                <input type="checkbox" name="like" id="like4" class="gallery__checkbox">
-                <label class="gallery__custom-like" for="like4"></label>
+                <h2 class="gallery__place-name">Гора Эльбрус</h2>
+                <button class="gallery__like-button" type="button" aria-label="Нравится"></button>
               </div>
             </li>
             <li class="gallery__list-item">
@@ -88,9 +80,8 @@
                 alt="Домбай"
               >
               <div class="gallery__information">
-                <p class="gallery__place-name">Домбай</p>
-                <input type="checkbox" name="like" id="like5" class="gallery__checkbox">
-                <label class="gallery__custom-like" for="like5"></label>
+                <h2 class="gallery__place-name">Домбай</h2>
+                <button class="gallery__like-button" type="button" aria-label="Нравится"></button>
               </div>
             </li>
             <li class="gallery__list-item">
@@ -100,36 +91,33 @@
                 alt="Карачаевск"
               >
               <div class="gallery__information">
-                <p class="gallery__place-name">Карачаево-Черкесия</p>
-                <input type="checkbox" name="like" id="like6" class="gallery__checkbox">
-                <label class="gallery__custom-like" for="like6"></label>
+                <h2 class="gallery__place-name">Карачаево-Черкесия</h2>
+                <button class="gallery__like-button" type="button" aria-label="Нравится"></button>
               </div>
             </li>
           </ul>
         </section>
-        <section class="popup popup_opened">
-          <button class="popup__close-button"></button>
-          <form class="popup__container">
+        <div class="popup">
+          <div class="popup__container">
+            <button class="popup__close-button" type="button" aria-label="Закрыть"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input 
-              type="text" 
-              class="popup__field" 
-              name="name" 
-              value="Жак-Ив Кусто"
-            >
-            <input 
-              type="text" 
-              class="popup__field" 
-              name="description" 
-              value="Исследователь океана"
-            >
-            <input 
-              type="submit" 
-              class="popup__save-button" 
-              value="Сохранить"
-            >
-          </form>
-        </section>
+            <form class="popup__form" name="edit-profile">
+              <input
+                type="text"
+                class="popup__field"
+                name="name"
+                value="Жак-Ив Кусто"
+              >
+              <input
+                type="text"
+                class="popup__field"
+                name="description"
+                value="Исследователь океана"
+              >
+              <input type="submit" class="popup__save-button" value="Сохранить">
+            </form>
+          </div>
+        </div>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&copy; 2022 Mesto Russia</p>

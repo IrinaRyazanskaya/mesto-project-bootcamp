@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding: 66px 0 60px;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 @media screen and (max-width: 920px) {
@@ -14,6 +15,6 @@
 
 @media screen and (max-width: 375px) {
   .footer {
-    padding-left: 19px;
+    padding: 48px 19px 36px;
   }
 }
