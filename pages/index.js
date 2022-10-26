@@ -59,15 +59,18 @@ function createGalleryItem() {
     return listItem;
 }
 
-// create elements for gallery
+// create cards for gallery
 function createCard(link, name) {
     const cardClone = galleryCard.cloneNode(true);
     const cardClonePhoto = cardClone.querySelector('.gallery__photo');
     const cardClonePlace = cardClone.querySelector('.gallery__place-name');
+    const likeButton = cardClone.querySelector('.gallery__like-button');
 
     cardClonePhoto.src = link;
     cardClonePhoto.alt = name;
     cardClonePlace.textContent = name;
+
+    likeButton.addEventListener('click', toggleLikeButton);
 
     return cardClone;
 }
@@ -146,4 +149,9 @@ function addFormSubmitHandler(evt) {
     inputPlace.value = '';
 
     closeAddPopup();
+}
+
+// toggle like button
+function toggleLikeButton(evt) {
+    evt.target.classList.toggle('gallery__like-button_active');
 }
