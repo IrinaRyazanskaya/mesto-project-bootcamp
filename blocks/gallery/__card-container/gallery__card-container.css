@@ -1,4 +1,5 @@
-.gallery__list-item {
+.gallery__card-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 282px;
