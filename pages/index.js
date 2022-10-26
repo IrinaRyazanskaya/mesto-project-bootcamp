@@ -59,18 +59,20 @@ function createGalleryItem() {
     return listItem;
 }
 
-// create cards for gallery
+// create cards and delete cards
 function createCard(link, name) {
     const cardClone = galleryCard.cloneNode(true);
     const cardClonePhoto = cardClone.querySelector('.gallery__photo');
     const cardClonePlace = cardClone.querySelector('.gallery__place-name');
     const likeButton = cardClone.querySelector('.gallery__like-button');
+    const deleteCardButton = cardClone.querySelector('.gallery__delete-button');
 
     cardClonePhoto.src = link;
     cardClonePhoto.alt = name;
     cardClonePlace.textContent = name;
 
     likeButton.addEventListener('click', toggleLikeButton);
+    deleteCardButton.addEventListener('click', deleteCard);
 
     return cardClone;
 }
@@ -154,4 +156,10 @@ function addFormSubmitHandler(evt) {
 // toggle like button
 function toggleLikeButton(evt) {
     evt.target.classList.toggle('gallery__like-button_active');
+}
+
+// delete card
+function deleteCard(evt) {
+    const listItem = evt.target.closest('.gallery__list-item');
+    listItem.remove();
 }
