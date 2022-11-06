@@ -57,14 +57,6 @@ const imagePopup = document.querySelector('#image-popup');
 const imageElement = document.querySelector('.popup__image');
 const captionElement = document.querySelector('.popup__caption');
 
-// create gallery item
-function createGalleryItem() {
-  const listItem = document.createElement('li');
-  listItem.classList.add('gallery__list-item');
-
-  return listItem;
-}
-
 // create cards and delete cards
 function createCard(link, name) {
   const cardClone = galleryCard.cloneNode(true);
@@ -86,11 +78,8 @@ function createCard(link, name) {
 
 // fill gallery
 for (let i = 0; i < initialCards.length; i++) {
-  const galleryItem = createGalleryItem();
   const newCard = createCard(initialCards[i].link, initialCards[i].name);
-
-  galleryList.append(galleryItem);
-  galleryItem.append(newCard);
+  galleryList.append(newCard);
 }
 
 // open popup
@@ -148,7 +137,7 @@ function handleProfileFormSubmit(evt) {
   userName.textContent = inputName.value;
   userDescription.textContent = inputDescription.value;
 
-  closeEditPopup();
+  closePopup(editPopup);
 }
 
 // submit add form
@@ -157,16 +146,13 @@ addForm.addEventListener('submit', handleNewCardFormSubmit);
 function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
 
-  const galleryItem = createGalleryItem();
   const newCard = createCard(inputLink.value, inputPlace.value);
-
-  galleryList.prepend(galleryItem);
-  galleryItem.append(newCard);
+  galleryList.prepend(newCard);
 
   inputLink.value = '';
   inputPlace.value = '';
 
-  closeAddPopup();
+  closePopup(addPopup);
 }
 
 // toggle like button

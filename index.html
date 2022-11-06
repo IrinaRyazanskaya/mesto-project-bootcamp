@@ -30,28 +30,30 @@
         <section class="gallery">
           <ul class="gallery__list">
             <template id="card">
-              <div class="gallery__card-container">
-                <button 
-                  class="gallery__delete-button" 
-                  type="button" 
-                  aria-label="Удалить"
-                >
-                </button>
-                <img
-                  class="gallery__photo"
-                  src=""
-                  alt=""
-                >
-                <div class="gallery__information">
-                  <h2 class="gallery__place-name"></h2>
+              <li class="gallery__list-item">
+                <div class="gallery__card-container">
                   <button 
-                    class="gallery__like-button" 
+                    class="gallery__delete-button" 
                     type="button" 
-                    aria-label="Нравится"
+                    aria-label="Удалить"
                   >
                   </button>
+                  <img
+                    class="gallery__photo"
+                    src=""
+                    alt=""
+                  >
+                  <div class="gallery__information">
+                    <h2 class="gallery__place-name"></h2>
+                    <button 
+                      class="gallery__like-button" 
+                      type="button" 
+                      aria-label="Нравится"
+                    >
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </li>
             </template>
           </ul>
         </section>
