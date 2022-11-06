@@ -38,7 +38,7 @@ const addButton = document.querySelector('.profile__add-button');
 // find elements for edit popup
 const closeEditPopupButton = document.querySelector('#close-edit-popup');
 const editPopup = document.querySelector('#edit-popup');
-const editForm = document.querySelector('#edit-form');
+const editForm = document.forms['edit-profile'];
 const inputName = editForm.querySelector('.popup__field[name="name"]');
 const inputDescription = editForm.querySelector('.popup__field[name="description"]');
 const userName = document.querySelector('.profile__name');
@@ -47,7 +47,7 @@ const userDescription = document.querySelector('.profile__description');
 // find elements for add popup
 const closeAddPopupButton = document.querySelector('#close-add-popup');
 const addPopup = document.querySelector('#add-popup');
-const addForm = document.querySelector('#add-form');
+const addForm = document.forms['add-card'];
 const inputPlace = addForm.querySelector('.popup__field[name="place"]');
 const inputLink = addForm.querySelector('.popup__field[name="link"]');
 
