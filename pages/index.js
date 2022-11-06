@@ -151,8 +151,7 @@ function handleNewCardFormSubmit(evt) {
   const newCard = createCard(inputLink.value, inputPlace.value);
   galleryList.prepend(newCard);
 
-  inputLink.value = '';
-  inputPlace.value = '';
+  addForm.reset();
 
   closePopup(addPopup);
 }
