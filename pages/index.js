@@ -71,7 +71,9 @@ function createCard(link, name) {
 
   likeButton.addEventListener('click', toggleLikeButton);
   deleteCardButton.addEventListener('click', deleteCard);
-  cardPhoto.addEventListener('click', openImagePopup);
+  cardPhoto.addEventListener('click', () => {
+    openImagePopup(link, name);
+  });
 
   return cardClone;
 }
@@ -96,11 +98,11 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-function openImagePopup(evt) {
+function openImagePopup(link, name) {
   openPopup(imagePopup);
-  imageElement.src = evt.target.src;
-  imageElement.alt = evt.target.alt;
-  captionElement.textContent = evt.target.alt;
+  imageElement.src = link;
+  imageElement.alt = name;
+  captionElement.textContent = name;
 }
 
 // close popup
