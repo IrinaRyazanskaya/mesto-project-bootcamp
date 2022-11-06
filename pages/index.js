@@ -99,13 +99,13 @@ editButton.addEventListener('click', () => {
   openEditPopup();
 });
 
+addButton.addEventListener('click', openAddPopup);
+
 function openEditPopup() {
-  const editPopup = document.querySelector('#edit-popup');
   editPopup.classList.add('popup_opened');
 }
 
 function openAddPopup() {
-  const addPopup = document.querySelector('#add-popup');
   addPopup.classList.add('popup_opened');
 }
 
@@ -135,7 +135,6 @@ function closeImagePopup() {
 }
 
 // fill edit form
-
 
 function fillForm() {
   const nameValue = userName.textContent;
