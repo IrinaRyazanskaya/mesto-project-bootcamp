@@ -140,9 +140,9 @@ function fillForm() {
 }
 
 // submit edit form
-editForm.addEventListener('submit', editFormSubmitHandler);
+editForm.addEventListener('submit', handleProfileFormSubmit);
 
-function editFormSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   userName.textContent = inputName.value;
@@ -152,9 +152,9 @@ function editFormSubmitHandler(evt) {
 }
 
 // submit add form
-addForm.addEventListener('submit', addFormSubmitHandler);
+addForm.addEventListener('submit', handleNewCardFormSubmit);
 
-function addFormSubmitHandler(evt) {
+function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
 
   const galleryItem = createGalleryItem();
