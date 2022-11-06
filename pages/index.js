@@ -94,8 +94,10 @@ for (let i = 0; i < initialCards.length; i++) {
 }
 
 // open popup
-editButton.addEventListener('click', openEditPopup);
-addButton.addEventListener('click', openAddPopup);
+editButton.addEventListener('click', () => {
+  fillForm();
+  openEditPopup();
+});
 
 function openEditPopup() {
   const editPopup = document.querySelector('#edit-popup');
@@ -133,7 +135,7 @@ function closeImagePopup() {
 }
 
 // fill edit form
-editButton.addEventListener('click', fillForm);
+
 
 function fillForm() {
   const nameValue = userName.textContent;
