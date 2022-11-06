@@ -96,42 +96,37 @@ for (let i = 0; i < initialCards.length; i++) {
 // open popup
 editButton.addEventListener('click', () => {
   fillForm();
-  openEditPopup();
+  openPopup(editPopup);
 });
 
-addButton.addEventListener('click', openAddPopup);
+addButton.addEventListener('click', () => {
+  openPopup(addPopup);
+});
 
-function openEditPopup() {
-  editPopup.classList.add('popup_opened');
-}
-
-function openAddPopup() {
-  addPopup.classList.add('popup_opened');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }
 
 function openImagePopup(evt) {
-  imagePopup.classList.add('popup_opened');
+  openPopup(imagePopup);
   imageElement.src = evt.target.src;
   imageElement.alt = evt.target.alt;
   captionElement.textContent = evt.target.alt;
 }
 
 // close popup
-closeEditPopupButton.addEventListener('click', closeEditPopup);
-closeAddPopupButton.addEventListener('click', closeAddPopup);
-closeImagePopupButton.addEventListener('click', closeImagePopup);
+closeEditPopupButton.addEventListener('click', () => {
+  closePopup(editPopup);
+});
+closeAddPopupButton.addEventListener('click', () => {
+  closePopup(addPopup);
+});
+closeImagePopupButton.addEventListener('click', () => {
+  closePopup(imagePopup);
+});
 
-
-function closeEditPopup() {
-  editPopup.classList.remove('popup_opened');
-}
-
-function closeAddPopup() {
-  addPopup.classList.remove('popup_opened');
-}
-
-function closeImagePopup() {
-  imagePopup.classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 // fill edit form
