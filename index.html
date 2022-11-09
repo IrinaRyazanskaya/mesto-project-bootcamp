@@ -66,17 +66,27 @@
             >
             </button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="edit-profile">
+            <form class="popup__form" name="edit-profile" novalidate>
               <input
+                id="name-input"
                 type="text"
                 class="popup__field"
                 name="name"
+                required
+                minlength="2"
+                maxlength="40"
               >
+              <span class="name-input-error popup__input-error"></span>
               <input
+                id="description-input"
                 type="text"
                 class="popup__field"
                 name="description"
+                required
+                minlength="2"
+                maxlength="200"
               >
+              <span class="description-input-error popup__input-error"></span>
               <input type="submit" class="popup__save-button" value="Сохранить">
             </form>
           </div>
@@ -90,19 +100,27 @@
             >
             </button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form" name="add-card">
+            <form class="popup__form" name="add-card" novalidate>
               <input
+                id="place-input"
                 type="text"
                 class="popup__field"
                 name="place"
                 placeholder="Название"
+                required
+                minlength="2"
+                maxlength="30"
               >
+              <span class="place-input-error popup__input-error"></span>
               <input
-                type="text"
+                id="link-input"
+                type="url"
                 class="popup__field"
                 name="link"
                 placeholder="Ссылка на картинку"
+                required
               >
+              <span class="link-input-error popup__input-error"></span>
               <input type="submit" class="popup__save-button" value="Создать">
             </form>
           </div>
