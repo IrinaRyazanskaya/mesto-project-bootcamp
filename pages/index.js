@@ -104,10 +104,19 @@ function openImagePopup(link, name) {
 
 // close popup
 const closeButtons = document.querySelectorAll('.popup__close-button');
+const overlays = document.querySelectorAll('.popup');
 
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
+});
+
+overlays.forEach((overlay) => {
+  overlay.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup')) {
+      closePopup(overlay);
+    }
+  });
 });
 
 function closePopup(popup) {
