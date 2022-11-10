@@ -93,6 +93,7 @@ addButton.addEventListener('click', () => {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscClosePopup);
 }
 
 function openImagePopup(link, name) {
@@ -112,15 +113,24 @@ closeButtons.forEach((button) => {
 });
 
 overlays.forEach((overlay) => {
-  overlay.addEventListener('click', (evt) => {
+  overlay.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup')) {
       closePopup(overlay);
     }
   });
 });
 
+function handleEscClosePopup(evt) {
+  const openedPopup = document.querySelector('.popup_opened');
+
+  if (evt.key === 'Escape') {
+    closePopup(openedPopup);
+  }
+}
+
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscClosePopup);
 }
 
 // fill edit form
