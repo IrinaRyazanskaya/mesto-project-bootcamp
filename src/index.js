@@ -1,3 +1,5 @@
+import './index.css';
+
 // initialCards
 const initialCards = [
   {

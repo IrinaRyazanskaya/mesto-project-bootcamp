@@ -4,20 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Проект "Место"</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="root">
     <div class="page">
       <header class="header">
         <a class="header__logo-link" href="#" target="_blank">
-          <img class="header__logo" src="./images/logo.svg" alt="Лого Mesto">
+          <img 
+            class="header__logo" 
+            src="<%=require('./images/logo.svg')%>" 
+            alt="Лого Mesto"
+          >
         </a>
       </header>
       <main class="main">
         <section class="profile">
           <img
             class="profile__avatar"
-            src="./images/avatar.jpg"
+            src="<%=require('./images/avatar.jpg')%>"
             alt="Аватар пользователя"
           >
           <div class="profile__personality">
@@ -146,6 +149,5 @@
         <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
       </footer>
     </div>
-    <script src="./pages/index.js" type="module"></script>
   </body>
 </html>
