@@ -141,25 +141,40 @@ function fillForm() {
 
   inputName.value = nameValue;
   inputDescription.value = descriptionValue;
+
+  hideInputError(editForm, inputName);
+  hideInputError(editForm, inputDescription);
 }
 
 // submit edit form
 editForm.addEventListener('submit', handleProfileFormSubmit);
+const saveButtonEditForm = editForm.querySelector('.popup__save-button');
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+
+  if (hasInvalidInput([inputName, inputDescription])) {
+    return;
+  }
 
   userName.textContent = inputName.value;
   userDescription.textContent = inputDescription.value;
 
   closePopup(editPopup);
+
+  saveButtonEditForm.classList.add('popup__save-button_inactive');
 }
 
 // submit add form
 addForm.addEventListener('submit', handleNewCardFormSubmit);
+const saveButtonAddForm = addForm.querySelector('.popup__save-button');
 
 function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
+
+  if (hasInvalidInput([inputLink, inputPlace])) {
+    return;
+  }
 
   const newCard = createCard(inputLink.value, inputPlace.value);
   galleryList.prepend(newCard);
@@ -167,6 +182,8 @@ function handleNewCardFormSubmit(evt) {
   addForm.reset();
 
   closePopup(addPopup);
+
+  saveButtonAddForm.classList.add('popup__save-button_inactive');
 }
 
 // toggle like button
