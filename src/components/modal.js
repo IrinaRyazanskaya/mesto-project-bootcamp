@@ -1,4 +1,3 @@
-import { hasInvalidInput } from './utils.js';
 import { galleryList, createCard } from './card.js';
 import { hideInputError } from './validate.js';
 
@@ -37,14 +36,9 @@ function openImagePopup(link, name) {
   captionElement.textContent = name;
 }
 
-// close popup
-const closeButtons = document.querySelectorAll('.popup__close-button');
-const overlays = document.querySelectorAll('.popup');
-
 function handleEscClosePopup(evt) {
-  const openedPopup = document.querySelector('.popup_opened');
-
   if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
@@ -72,15 +66,12 @@ const saveButtonEditForm = editForm.querySelector('.popup__save-button');
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  if (hasInvalidInput([inputName, inputDescription])) {
-    return;
-  }
-
   userName.textContent = inputName.value;
   userDescription.textContent = inputDescription.value;
 
   closePopup(editPopup);
 
+  saveButtonEditForm.setAttribute('disabled', '');
   saveButtonEditForm.classList.add('popup__save-button_inactive');
 }
 
@@ -90,10 +81,6 @@ const saveButtonAddForm = addForm.querySelector('.popup__save-button');
 function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
 
-  if (hasInvalidInput([inputLink, inputPlace])) {
-    return;
-  }
-
   const newCard = createCard(inputLink.value, inputPlace.value);
   galleryList.prepend(newCard);
 
@@ -101,6 +88,7 @@ function handleNewCardFormSubmit(evt) {
 
   closePopup(addPopup);
 
+  saveButtonAddForm.setAttribute('disabled', '');
   saveButtonAddForm.classList.add('popup__save-button_inactive');
 }
 
@@ -109,8 +97,6 @@ export {
   addButton,
   editPopup,
   addPopup,
-  closeButtons,
-  overlays,
   closePopup,
   editForm,
   addForm,

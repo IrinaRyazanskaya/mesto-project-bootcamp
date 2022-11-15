@@ -1,16 +1,14 @@
 import { galleryList, createCard } from './components/card.js';
-import { 
-  editButton, 
-  addButton, 
-  editPopup, 
-  addPopup, 
-  closeButtons, 
-  overlays,
+import {
+  editButton,
+  addButton,
+  editPopup,
+  addPopup,
   closePopup,
   editForm,
   addForm,
   handleNewCardFormSubmit,
-  handleProfileFormSubmit, 
+  handleProfileFormSubmit,
   openPopup,
   fillForm,
 } from './components/modal.js';
@@ -63,15 +61,15 @@ addButton.addEventListener('click', () => {
 });
 
 // close popups
-closeButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-});
+const popups = document.querySelectorAll('.popup');
 
-overlays.forEach((overlay) => {
-  overlay.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup')) {
-      closePopup(overlay);
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(popup);
     }
   });
 });
