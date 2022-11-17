@@ -8,7 +8,9 @@ const fetchSettings = {
 
 function getUserInformation(settings) {
   return fetch(`${settings.baseUrl}/users/me`, {
-    headers: settings.headers
+    headers: {
+      authorization: settings.headers.authorization
+    }
   })
     .then((response) => {
       return response.json();
@@ -17,11 +19,27 @@ function getUserInformation(settings) {
 
 function getCards(settings) {
   return fetch(`${settings.baseUrl}/cards`, {
-    headers: settings.headers
+    headers: {
+      authorization: settings.headers.authorization
+    }
   })
-  .then((response) => {
-    return response.json();
-  });
+    .then((response) => {
+      return response.json();
+    });
 }
 
-export { fetchSettings, getUserInformation, getCards };
+function updateProfile(settings, name, about) {
+  return fetch(`${settings.baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: settings.headers,
+    body: JSON.stringify({
+      name,
+      about
+    })
+  })
+    .then((response) => {
+      return response.json();
+    });
+}
+
+export { fetchSettings, getUserInformation, getCards, updateProfile };

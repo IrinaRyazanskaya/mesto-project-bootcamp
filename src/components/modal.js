@@ -1,5 +1,6 @@
 import { galleryList, createCard } from './card.js';
 import { hideInputError } from './validate.js';
+import { fetchSettings, updateProfile } from './api.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -66,13 +67,27 @@ const saveButtonEditForm = editForm.querySelector('.popup__save-button');
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  userName.textContent = inputName.value;
-  userDescription.textContent = inputDescription.value;
-
-  closePopup(editPopup);
-
+  saveButtonEditForm.setAttribute('value', 'Сохранение...');
   saveButtonEditForm.setAttribute('disabled', '');
-  saveButtonEditForm.classList.add('popup__save-button_inactive');
+
+  updateProfile(
+    fetchSettings,
+    inputName.value,
+    inputDescription.value
+  )
+    .then((data) => {
+      userName.textContent = data.name;
+      userDescription.textContent = data.about;
+
+      closePopup(editPopup);
+
+      saveButtonEditForm.classList.add('popup__save-button_inactive');
+      saveButtonEditForm.setAttribute('value', 'Сохранить');
+    })
+    .catch((error) => {
+      saveButtonEditForm.removeAttribute('disabled');
+      console.error(error);
+    });
 }
 
 // submit add form

@@ -13,7 +13,11 @@ import {
   fillForm,
 } from './components/modal.js';
 import { formValidationSettings, enableValidation } from './components/validate.js';
-import { fetchSettings, getUserInformation, getCards } from './components/api.js';
+import { 
+  fetchSettings, 
+  getUserInformation, 
+  getCards 
+} from './components/api.js';
 
 import './index.css';
 
@@ -86,6 +90,9 @@ function fillProfileFromAPI(settings) {
       descriptionField.textContent = data.about;
       avatarImage.setAttribute('src', data.avatar);
     })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 function fillGalleryFromAPI(settings) {
@@ -99,6 +106,9 @@ function fillGalleryFromAPI(settings) {
     });
 
     galleryList.append(allCards);
+  })
+  .catch((error) => {
+    console.error(error);
   });
 }
 
