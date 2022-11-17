@@ -1,6 +1,6 @@
 import { galleryList, createCard } from './card.js';
 import { hideInputError } from './validate.js';
-import { fetchSettings, updateProfile } from './api.js';
+import { fetchSettings, updateProfile, addNewCard } from './api.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -96,15 +96,29 @@ const saveButtonAddForm = addForm.querySelector('.popup__save-button');
 function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
 
-  const newCard = createCard(inputLink.value, inputPlace.value);
-  galleryList.prepend(newCard);
-
-  addForm.reset();
-
-  closePopup(addPopup);
-
+  saveButtonAddForm.setAttribute('value', 'Сохранение...');
   saveButtonAddForm.setAttribute('disabled', '');
-  saveButtonAddForm.classList.add('popup__save-button_inactive');
+
+  addNewCard(
+    fetchSettings,
+    inputLink.value,
+    inputPlace.value
+  )
+    .then((data) => {
+      const newCard = createCard(data.link, data.name);
+      galleryList.prepend(newCard);
+
+      addForm.reset();
+
+      closePopup(addPopup);
+
+      saveButtonAddForm.setAttribute('value', 'Сохранить');
+      saveButtonAddForm.classList.add('popup__save-button_inactive');
+    })
+    .catch((error) => {
+      saveButtonAddForm.removeAttribute('disabled');
+      console.error(error);
+    });
 }
 
 export {

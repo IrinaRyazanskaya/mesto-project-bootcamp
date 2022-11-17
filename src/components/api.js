@@ -13,7 +13,11 @@ function getUserInformation(settings) {
     }
   })
     .then((response) => {
-      return response.json();
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка: ${response.status}`);
     });
 }
 
@@ -24,7 +28,11 @@ function getCards(settings) {
     }
   })
     .then((response) => {
-      return response.json();
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка: ${response.status}`);
     });
 }
 
@@ -38,8 +46,30 @@ function updateProfile(settings, name, about) {
     })
   })
     .then((response) => {
-      return response.json();
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка: ${response.status}`);
     });
 }
 
-export { fetchSettings, getUserInformation, getCards, updateProfile };
+function addNewCard(settings, link, name) {
+  return fetch(`${settings.baseUrl}/cards`, {
+    method: 'POST',
+    headers: settings.headers,
+    body: JSON.stringify({
+      link,
+      name
+    })
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка: ${response.status}`);
+    });
+}
+
+export { fetchSettings, getUserInformation, getCards, updateProfile, addNewCard };
