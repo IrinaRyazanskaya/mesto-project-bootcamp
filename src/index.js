@@ -13,9 +13,9 @@ import {
   fillForm,
 } from './components/modal.js';
 import { formValidationSettings, enableValidation } from './components/validate.js';
-import { 
-  fetchSettings, 
-  getUserInformation, 
+import {
+  fetchSettings,
+  getUserInformation,
   getCards
 } from './components/api.js';
 
@@ -56,33 +56,43 @@ function fillProfileFromAPI(settings) {
   const descriptionField = document.querySelector('.profile__description');
   const avatarImage = document.querySelector('.profile__avatar');
 
-  getUserInformation(settings)
+  return getUserInformation(settings)
     .then((data) => {
       nameField.textContent = data.name;
       descriptionField.textContent = data.about;
       avatarImage.setAttribute('src', data.avatar);
+
+      return data;
     })
     .catch((error) => {
       console.error(error);
     });
 }
 
-function fillGalleryFromAPI(settings) {
+function fillGalleryFromAPI(settings, profile) {
   getCards(settings)
-  .then((data) => {
-    const allCards = document.createDocumentFragment();
-    
-    data.forEach((card) => {
-      const newCard = createCard(card.link, card.name, card.likes);
-      allCards.append(newCard);
-    });
+    .then((data) => {
+      const allCards = document.createDocumentFragment();
 
-    galleryList.append(allCards);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+      data.forEach((card) => {
+        const newCard = createCard(
+          card._id,
+          card.link,
+          card.name,
+          card.likes,
+          profile._id
+        );
+        allCards.append(newCard);
+      });
+
+      galleryList.append(allCards);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
-fillProfileFromAPI(fetchSettings);
-fillGalleryFromAPI(fetchSettings);
+fillProfileFromAPI(fetchSettings)
+  .then((data) => {
+    return fillGalleryFromAPI(fetchSettings, data);
+  });

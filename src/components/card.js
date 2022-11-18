@@ -1,4 +1,5 @@
 import { openImagePopup } from './modal.js';
+import { fetchSettings, putLike, deleteLike } from './api.js';
 
 // find elements for gallery
 const galleryList = document.querySelector('.gallery__list');
@@ -6,7 +7,7 @@ const cardTemplate = document.querySelector('#card').content;
 const galleryCard = cardTemplate.querySelector('.gallery__list-item');
 
 // create cards and delete cards
-function createCard(link, name, likes) {
+function createCard(id, link, name, likes, userId = undefined) {
   const cardClone = galleryCard.cloneNode(true);
   const cardPhoto = cardClone.querySelector('.gallery__photo');
   const cardPlace = cardClone.querySelector('.gallery__place-name');
@@ -19,7 +20,17 @@ function createCard(link, name, likes) {
   cardPlace.textContent = name;
   likesCounter.textContent = likes.length;
 
-  likeButton.addEventListener('click', toggleLikeButton);
+  likes.forEach(like => {
+    const userLike = like._id;
+
+    if (userLike === userId) {
+      likeButton.classList.add('gallery__like-button_active');
+    }
+  });
+
+  likeButton.addEventListener('click', () => {
+    toggleLikeButton(likeButton, likesCounter, id);
+  });
   deleteCardButton.addEventListener('click', deleteCard);
   cardPhoto.addEventListener('click', () => {
     openImagePopup(link, name, likes);
@@ -29,8 +40,26 @@ function createCard(link, name, likes) {
 }
 
 // toggle like button
-function toggleLikeButton(evt) {
-  evt.target.classList.toggle('gallery__like-button_active');
+function toggleLikeButton(button, likesCounter, cardId) {
+  if (button.classList.contains('gallery__like-button_active')) {
+    deleteLike(fetchSettings, cardId)
+      .then((data) => {
+        likesCounter.textContent = data.likes.length;
+        button.classList.remove('gallery__like-button_active');
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  } else {
+    putLike(fetchSettings, cardId)
+      .then((data) => {
+        likesCounter.textContent = data.likes.length;
+        button.classList.add('gallery__like-button_active');
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  }
 }
 
 // delete card

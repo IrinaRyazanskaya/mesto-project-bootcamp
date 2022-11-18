@@ -88,12 +88,46 @@ function getLikesFromAPI(settings) {
     .then((data) => console.log(data));
 }
 
+function putLike(settings, cardId) {
+  return fetch(`${settings.baseUrl}/cards/likes/${cardId}`, {
+    method: 'PUT',
+    headers: {
+      authorization: settings.headers.authorization
+    }
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
 
-export { 
-  fetchSettings, 
-  getUserInformation, 
-  getCards, 
-  updateProfile, 
+      return Promise.reject(`Ошибка: ${response.status}`);
+    });
+}
+
+function deleteLike(settings, cardId) {
+  return fetch(`${settings.baseUrl}/cards/likes/${cardId}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: settings.headers.authorization
+    }
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка: ${response.status}`);
+    });
+}
+
+
+export {
+  fetchSettings,
+  getUserInformation,
+  getCards,
+  updateProfile,
   addNewCard,
-  getLikesFromAPI
+  getLikesFromAPI,
+  putLike,
+  deleteLike
 };

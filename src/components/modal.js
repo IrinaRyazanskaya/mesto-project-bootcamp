@@ -105,7 +105,7 @@ function handleNewCardFormSubmit(evt) {
     inputPlace.value
   )
     .then((data) => {
-      const newCard = createCard(data.link, data.name, data.likes);
+      const newCard = createCard(data._id, data.link, data.name, data.likes);
       galleryList.prepend(newCard);
 
       addForm.reset();
