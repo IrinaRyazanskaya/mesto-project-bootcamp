@@ -1,6 +1,11 @@
 import { galleryList, createCard } from './card.js';
 import { hideInputError } from './validate.js';
-import { fetchSettings, updateProfile, addNewCard, changeAvatar } from './api.js';
+import { 
+  fetchSettings, 
+  makeUpdateProfileRequest, 
+  makeAddNewCardRequest, 
+  makeChangeAvatarRequest 
+} from './api.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -77,7 +82,7 @@ function handleProfileFormSubmit(evt) {
   saveButtonEditForm.setAttribute('value', 'Сохранение...');
   saveButtonEditForm.setAttribute('disabled', '');
 
-  updateProfile(
+  makeUpdateProfileRequest(
     fetchSettings,
     inputName.value,
     inputDescription.value
@@ -106,13 +111,19 @@ function handleNewCardFormSubmit(evt) {
   saveButtonAddForm.setAttribute('value', 'Сохранение...');
   saveButtonAddForm.setAttribute('disabled', '');
 
-  addNewCard(
+  makeAddNewCardRequest(
     fetchSettings,
     inputLink.value,
     inputPlace.value
   )
     .then((data) => {
-      const newCard = createCard(data._id, data.link, data.name, data.likes);
+      const newCard = createCard(
+        data._id, 
+        data.link, 
+        data.name, 
+        data.likes, 
+        data.owner
+      );
       galleryList.prepend(newCard);
 
       addForm.reset();
@@ -137,7 +148,7 @@ function handleChangeAvatarFormSubmit(evt) {
   saveButtonAvatarForm.setAttribute('value', 'Сохранение...');
   saveButtonAvatarForm.setAttribute('disabled', '');
 
-  changeAvatar(
+  makeChangeAvatarRequest(
     fetchSettings,
     inputAvatarLink.value
   )

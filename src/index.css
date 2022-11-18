@@ -18,6 +18,7 @@
 @import url(./blocks/gallery/gallery.css);
 @import url(./blocks/gallery/__list/gallery__list.css);
 @import url(./blocks/gallery/__delete-button/gallery__delete-button.css);
+@import url(./blocks/gallery/__delete-button/_inactive/gallery__delete-button_inactive.css);
 @import url(./blocks/gallery/__card-container/gallery__card-container.css);
 @import url(./blocks/gallery/__photo/gallery__photo.css);
 @import url(./blocks/gallery/__information/gallery__information.css);

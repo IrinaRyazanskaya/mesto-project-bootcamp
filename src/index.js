@@ -3,7 +3,6 @@ import {
   editButton,
   addButton,
   avatarChangeButton,
-  avatarElement,
   editPopup,
   addPopup,
   changeAvatarPopup,
@@ -20,8 +19,8 @@ import {
 import { formValidationSettings, enableValidation } from './components/validate.js';
 import {
   fetchSettings,
-  getUserInformation,
-  getCards
+  makeUserInfoRequest,
+  makeGetCardsRequest
 } from './components/api.js';
 
 import './index.css';
@@ -66,7 +65,7 @@ function fillProfileFromAPI(settings) {
   const descriptionField = document.querySelector('.profile__description');
   const avatarImage = document.querySelector('.profile__avatar');
 
-  return getUserInformation(settings)
+  return makeUserInfoRequest(settings)
     .then((data) => {
       nameField.textContent = data.name;
       descriptionField.textContent = data.about;
@@ -80,7 +79,7 @@ function fillProfileFromAPI(settings) {
 }
 
 function fillGalleryFromAPI(settings, profile) {
-  getCards(settings)
+  makeGetCardsRequest(settings)
     .then((data) => {
       const allCards = document.createDocumentFragment();
 
@@ -90,6 +89,7 @@ function fillGalleryFromAPI(settings, profile) {
           card.link,
           card.name,
           card.likes,
+          card.owner,
           profile._id
         );
         allCards.append(newCard);

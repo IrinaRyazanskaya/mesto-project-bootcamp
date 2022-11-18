@@ -1,5 +1,10 @@
 import { openImagePopup } from './modal.js';
-import { fetchSettings, putLike, deleteLike } from './api.js';
+import { 
+  fetchSettings, 
+  makePutLikeRequest, 
+  makeDeleteLikeRequest, 
+  makeDeleteCardRequest 
+} from './api.js';
 
 // find elements for gallery
 const galleryList = document.querySelector('.gallery__list');
@@ -7,7 +12,7 @@ const cardTemplate = document.querySelector('#card').content;
 const galleryCard = cardTemplate.querySelector('.gallery__list-item');
 
 // create cards and delete cards
-function createCard(id, link, name, likes, userId = undefined) {
+function createCard(id, link, name, likes, owner, userId = undefined) {
   const cardClone = galleryCard.cloneNode(true);
   const cardPhoto = cardClone.querySelector('.gallery__photo');
   const cardPlace = cardClone.querySelector('.gallery__place-name');
@@ -28,6 +33,10 @@ function createCard(id, link, name, likes, userId = undefined) {
     }
   });
 
+  if (owner._id !== userId && userId !== undefined) {
+    deleteCardButton.classList.add('gallery__delete-button_inactive');
+  }
+
   likeButton.addEventListener('click', () => {
     toggleLikeButton(likeButton, likesCounter, id);
   });
@@ -42,7 +51,7 @@ function createCard(id, link, name, likes, userId = undefined) {
 // toggle like button
 function toggleLikeButton(button, likesCounter, cardId) {
   if (button.classList.contains('gallery__like-button_active')) {
-    deleteLike(fetchSettings, cardId)
+    makeDeleteLikeRequest(fetchSettings, cardId)
       .then((data) => {
         likesCounter.textContent = data.likes.length;
         button.classList.remove('gallery__like-button_active');
@@ -51,7 +60,7 @@ function toggleLikeButton(button, likesCounter, cardId) {
         console.error(error);
       })
   } else {
-    putLike(fetchSettings, cardId)
+    makePutLikeRequest(fetchSettings, cardId)
       .then((data) => {
         likesCounter.textContent = data.likes.length;
         button.classList.add('gallery__like-button_active');

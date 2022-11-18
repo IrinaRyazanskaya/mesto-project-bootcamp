@@ -6,7 +6,7 @@ const fetchSettings = {
   }
 }
 
-function getUserInformation(settings) {
+function makeUserInfoRequest(settings) {
   return fetch(`${settings.baseUrl}/users/me`, {
     headers: {
       authorization: settings.headers.authorization
@@ -21,7 +21,7 @@ function getUserInformation(settings) {
     });
 }
 
-function getCards(settings) {
+function makeGetCardsRequest(settings) {
   return fetch(`${settings.baseUrl}/cards`, {
     headers: {
       authorization: settings.headers.authorization
@@ -36,7 +36,7 @@ function getCards(settings) {
     });
 }
 
-function updateProfile(settings, name, about) {
+function makeUpdateProfileRequest(settings, name, about) {
   return fetch(`${settings.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: settings.headers,
@@ -54,7 +54,7 @@ function updateProfile(settings, name, about) {
     });
 }
 
-function addNewCard(settings, link, name) {
+function makeAddNewCardRequest(settings, link, name) {
   return fetch(`${settings.baseUrl}/cards`, {
     method: 'POST',
     headers: settings.headers,
@@ -72,23 +72,7 @@ function addNewCard(settings, link, name) {
     });
 }
 
-function getLikesFromAPI(settings) {
-  return fetch(`${settings.baseUrl}/cards`, {
-    headers: {
-      authorization: settings.headers.authorization
-    }
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
-    })
-    .then((data) => console.log(data));
-}
-
-function putLike(settings, cardId) {
+function makePutLikeRequest(settings, cardId) {
   return fetch(`${settings.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: {
@@ -104,7 +88,7 @@ function putLike(settings, cardId) {
     });
 }
 
-function deleteLike(settings, cardId) {
+function makeDeleteLikeRequest(settings, cardId) {
   return fetch(`${settings.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: {
@@ -120,7 +104,7 @@ function deleteLike(settings, cardId) {
     });
 }
 
-function changeAvatar(settings, avatar) {
+function makeChangeAvatarRequest(settings, avatar) {
   return fetch(`${settings.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: settings.headers,
@@ -137,14 +121,30 @@ function changeAvatar(settings, avatar) {
     });
 }
 
+function makeDeleteCardRequest(settings, cardId) {
+  return fetch(`${settings.baseUrl}/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: settings.headers.authorization
+    }
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка: ${response.status}`);
+    });
+}
+
 export {
   fetchSettings,
-  getUserInformation,
-  getCards,
-  updateProfile,
-  addNewCard,
-  getLikesFromAPI,
-  putLike,
-  deleteLike,
-  changeAvatar
+  makeUserInfoRequest,
+  makeGetCardsRequest,
+  makeUpdateProfileRequest,
+  makeAddNewCardRequest,
+  makePutLikeRequest,
+  makeDeleteLikeRequest,
+  makeChangeAvatarRequest,
+  makeDeleteCardRequest,
 };
