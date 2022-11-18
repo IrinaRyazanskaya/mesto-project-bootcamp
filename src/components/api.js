@@ -120,6 +120,22 @@ function deleteLike(settings, cardId) {
     });
 }
 
+function changeAvatar(settings, avatar) {
+  return fetch(`${settings.baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: settings.headers,
+    body: JSON.stringify({
+      avatar
+    })
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка: ${response.status}`);
+    });
+}
 
 export {
   fetchSettings,
@@ -129,5 +145,6 @@ export {
   addNewCard,
   getLikesFromAPI,
   putLike,
-  deleteLike
+  deleteLike,
+  changeAvatar
 };

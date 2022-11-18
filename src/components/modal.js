@@ -1,6 +1,6 @@
 import { galleryList, createCard } from './card.js';
 import { hideInputError } from './validate.js';
-import { fetchSettings, updateProfile, addNewCard } from './api.js';
+import { fetchSettings, updateProfile, addNewCard, changeAvatar } from './api.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
@@ -23,6 +23,13 @@ const inputLink = addForm.querySelector('.popup__field[name="link"]');
 const imagePopup = document.querySelector('#image-popup');
 const imageElement = document.querySelector('.popup__image');
 const captionElement = document.querySelector('.popup__caption');
+
+// find elements fot change avatar popup
+const avatarElement = document.querySelector('.profile__avatar');
+const avatarChangeButton = document.querySelector('.profile__edit-avatar');
+const changeAvatarPopup = document.querySelector('#change-avatar-popup');
+const changeAvatarForm = document.forms['change-avatar'];
+const inputAvatarLink = changeAvatarForm.querySelector('.popup__field[name="link"]');
 
 // open popup
 function openPopup(popup) {
@@ -121,16 +128,49 @@ function handleNewCardFormSubmit(evt) {
     });
 }
 
+// submit change avatar form
+const saveButtonAvatarForm = changeAvatarForm.querySelector('.popup__save-button');
+
+function handleChangeAvatarFormSubmit(evt) {
+  evt.preventDefault();
+
+  saveButtonAvatarForm.setAttribute('value', 'Сохранение...');
+  saveButtonAvatarForm.setAttribute('disabled', '');
+
+  changeAvatar(
+    fetchSettings,
+    inputAvatarLink.value
+  )
+  .then((data) => {
+    avatarElement.src = data.avatar;
+    changeAvatarForm.reset();
+
+    closePopup(changeAvatarPopup);
+
+    saveButtonAvatarForm.classList.add('popup__save-button_inactive');
+    saveButtonAvatarForm.setAttribute('value', 'Сохранить');
+  })
+  .catch((error) => {
+    saveButtonAvatarForm.removeAttribute('disabled');
+    console.error(error);
+  });
+}
+
 export {
   editButton,
   addButton,
+  avatarChangeButton,
+  avatarElement,
   editPopup,
   addPopup,
+  changeAvatarPopup,
   closePopup,
   editForm,
   addForm,
+  changeAvatarForm,
   handleNewCardFormSubmit,
   handleProfileFormSubmit,
+  handleChangeAvatarFormSubmit,
   openPopup,
   openImagePopup,
   fillForm,

@@ -2,13 +2,18 @@ import { galleryList, createCard } from './components/card.js';
 import {
   editButton,
   addButton,
+  avatarChangeButton,
+  avatarElement,
   editPopup,
   addPopup,
+  changeAvatarPopup,
   closePopup,
   editForm,
   addForm,
+  changeAvatarForm,
   handleNewCardFormSubmit,
   handleProfileFormSubmit,
+  handleChangeAvatarFormSubmit,
   openPopup,
   fillForm,
 } from './components/modal.js';
@@ -31,6 +36,10 @@ addButton.addEventListener('click', () => {
   openPopup(addPopup);
 });
 
+avatarChangeButton.addEventListener('click', () => {
+  openPopup(changeAvatarPopup);
+});
+
 // close popups
 const popups = document.querySelectorAll('.popup');
 
@@ -48,6 +57,7 @@ popups.forEach((popup) => {
 // forms submit
 editForm.addEventListener('submit', handleProfileFormSubmit);
 addForm.addEventListener('submit', handleNewCardFormSubmit);
+changeAvatarForm.addEventListener('submit', handleChangeAvatarFormSubmit);
 
 enableValidation(formValidationSettings);
 
