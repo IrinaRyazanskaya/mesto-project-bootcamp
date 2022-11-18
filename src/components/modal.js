@@ -122,7 +122,8 @@ function handleNewCardFormSubmit(evt) {
         data.link, 
         data.name, 
         data.likes, 
-        data.owner
+        data.owner,
+        data.owner._id
       );
       galleryList.prepend(newCard);
 

@@ -12,7 +12,7 @@ const cardTemplate = document.querySelector('#card').content;
 const galleryCard = cardTemplate.querySelector('.gallery__list-item');
 
 // create cards and delete cards
-function createCard(id, link, name, likes, owner, userId = undefined) {
+function createCard(id, link, name, likes, owner, userId) {
   const cardClone = galleryCard.cloneNode(true);
   const cardPhoto = cardClone.querySelector('.gallery__photo');
   const cardPlace = cardClone.querySelector('.gallery__place-name');
@@ -33,7 +33,7 @@ function createCard(id, link, name, likes, owner, userId = undefined) {
     }
   });
 
-  if (owner._id !== userId && userId !== undefined) {
+  if (owner._id !== userId) {
     deleteCardButton.classList.add('gallery__delete-button_inactive');
   }
 
