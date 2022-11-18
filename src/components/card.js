@@ -1,9 +1,9 @@
 import { openImagePopup } from './modal.js';
-import { 
-  fetchSettings, 
-  makePutLikeRequest, 
-  makeDeleteLikeRequest, 
-  makeDeleteCardRequest 
+import {
+  fetchSettings,
+  makePutLikeRequest,
+  makeDeleteLikeRequest,
+  makeDeleteCardRequest
 } from './api.js';
 
 // find elements for gallery
@@ -40,7 +40,9 @@ function createCard(id, link, name, likes, owner, userId = undefined) {
   likeButton.addEventListener('click', () => {
     toggleLikeButton(likeButton, likesCounter, id);
   });
-  deleteCardButton.addEventListener('click', deleteCard);
+  deleteCardButton.addEventListener('click', () => {
+    deleteCard(cardClone, id);
+  });
   cardPhoto.addEventListener('click', () => {
     openImagePopup(link, name, likes);
   });
@@ -72,9 +74,11 @@ function toggleLikeButton(button, likesCounter, cardId) {
 }
 
 // delete card
-function deleteCard(evt) {
-  const listItem = evt.target.closest('.gallery__list-item');
-  listItem.remove();
+function deleteCard(galleryCard, cardId) {
+  makeDeleteCardRequest(fetchSettings, cardId)
+    .then(() => {
+      galleryCard.remove();
+    })
 }
 
 export {
