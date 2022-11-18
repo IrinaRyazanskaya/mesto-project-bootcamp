@@ -16,7 +16,7 @@ import { formValidationSettings, enableValidation } from './components/validate.
 import { 
   fetchSettings, 
   getUserInformation, 
-  getCards 
+  getCards
 } from './components/api.js';
 
 import './index.css';
@@ -73,7 +73,7 @@ function fillGalleryFromAPI(settings) {
     const allCards = document.createDocumentFragment();
     
     data.forEach((card) => {
-      const newCard = createCard(card.link, card.name);
+      const newCard = createCard(card.link, card.name, card.likes);
       allCards.append(newCard);
     });
 

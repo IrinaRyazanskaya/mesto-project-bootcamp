@@ -6,21 +6,23 @@ const cardTemplate = document.querySelector('#card').content;
 const galleryCard = cardTemplate.querySelector('.gallery__list-item');
 
 // create cards and delete cards
-function createCard(link, name) {
+function createCard(link, name, likes) {
   const cardClone = galleryCard.cloneNode(true);
   const cardPhoto = cardClone.querySelector('.gallery__photo');
   const cardPlace = cardClone.querySelector('.gallery__place-name');
   const likeButton = cardClone.querySelector('.gallery__like-button');
   const deleteCardButton = cardClone.querySelector('.gallery__delete-button');
+  const likesCounter = cardClone.querySelector('.gallery__like-counter');
 
   cardPhoto.src = link;
   cardPhoto.alt = name;
   cardPlace.textContent = name;
+  likesCounter.textContent = likes.length;
 
   likeButton.addEventListener('click', toggleLikeButton);
   deleteCardButton.addEventListener('click', deleteCard);
   cardPhoto.addEventListener('click', () => {
-    openImagePopup(link, name);
+    openImagePopup(link, name, likes);
   });
 
   return cardClone;

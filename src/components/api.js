@@ -72,4 +72,28 @@ function addNewCard(settings, link, name) {
     });
 }
 
-export { fetchSettings, getUserInformation, getCards, updateProfile, addNewCard };
+function getLikesFromAPI(settings) {
+  return fetch(`${settings.baseUrl}/cards`, {
+    headers: {
+      authorization: settings.headers.authorization
+    }
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Ошибка: ${response.status}`);
+    })
+    .then((data) => console.log(data));
+}
+
+
+export { 
+  fetchSettings, 
+  getUserInformation, 
+  getCards, 
+  updateProfile, 
+  addNewCard,
+  getLikesFromAPI
+};
