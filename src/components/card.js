@@ -11,6 +11,11 @@ const galleryList = document.querySelector('.gallery__list');
 const cardTemplate = document.querySelector('#card').content;
 const galleryCard = cardTemplate.querySelector('.gallery__list-item');
 
+// find elements for image popup
+const imagePopup = document.querySelector('#image-popup');
+const imageElement = document.querySelector('.popup__image');
+const captionElement = document.querySelector('.popup__caption');
+
 // create cards and delete cards
 function createCard(id, link, name, likes, owner, userId) {
   const cardClone = galleryCard.cloneNode(true);
@@ -44,7 +49,10 @@ function createCard(id, link, name, likes, owner, userId) {
     deleteCard(cardClone, id);
   });
   cardPhoto.addEventListener('click', () => {
-    openImagePopup(link, name, likes);
+    openPopup(imagePopup);
+    imageElement.src = link;
+    imageElement.alt = name;
+    captionElement.textContent = name;
   });
 
   return cardClone;
@@ -84,7 +92,4 @@ function deleteCard(galleryCard, cardId) {
     })
 }
 
-export {
-  galleryList,
-  createCard,
-}
+export { galleryList, createCard }
