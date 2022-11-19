@@ -94,11 +94,13 @@ function handleProfileFormSubmit(evt) {
       closePopup(editPopup);
 
       saveButtonEditForm.classList.add('popup__save-button_inactive');
-      saveButtonEditForm.setAttribute('value', 'Сохранить');
     })
     .catch((error) => {
       saveButtonEditForm.removeAttribute('disabled');
       console.error(error);
+    })
+    .finally(() => {
+      saveButtonEditForm.setAttribute('value', 'Сохранить');
     });
 }
 
@@ -131,12 +133,14 @@ function handleNewCardFormSubmit(evt) {
 
       closePopup(addPopup);
 
-      saveButtonAddForm.setAttribute('value', 'Сохранить');
       saveButtonAddForm.classList.add('popup__save-button_inactive');
     })
     .catch((error) => {
       saveButtonAddForm.removeAttribute('disabled');
       console.error(error);
+    })
+    .finally(() => {
+      saveButtonAddForm.setAttribute('value', 'Сохранить');
     });
 }
 
@@ -160,11 +164,13 @@ function handleChangeAvatarFormSubmit(evt) {
     closePopup(changeAvatarPopup);
 
     saveButtonAvatarForm.classList.add('popup__save-button_inactive');
-    saveButtonAvatarForm.setAttribute('value', 'Сохранить');
   })
   .catch((error) => {
     saveButtonAvatarForm.removeAttribute('disabled');
     console.error(error);
+  })
+  .finally(() => {
+    saveButtonAvatarForm.setAttribute('value', 'Сохранить');
   });
 }
 
