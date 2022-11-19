@@ -79,6 +79,9 @@ function deleteCard(galleryCard, cardId) {
     .then(() => {
       galleryCard.remove();
     })
+    .catch((error) => {
+      console.error(error);
+    })
 }
 
 export {
