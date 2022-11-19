@@ -60,49 +60,45 @@ changeAvatarForm.addEventListener('submit', handleChangeAvatarFormSubmit);
 
 enableValidation(formValidationSettings);
 
-function fillProfileFromAPI(settings) {
+function fillProfileFromAPI(profileResponse) {
   const nameField = document.querySelector('.profile__name');
   const descriptionField = document.querySelector('.profile__description');
   const avatarImage = document.querySelector('.profile__avatar');
 
-  return makeUserInfoRequest(settings)
-    .then((data) => {
-      nameField.textContent = data.name;
-      descriptionField.textContent = data.about;
-      avatarImage.setAttribute('src', data.avatar);
-
-      return data;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  nameField.textContent = profileResponse.name;
+  descriptionField.textContent = profileResponse.about;
+  avatarImage.setAttribute('src', profileResponse.avatar);
 }
 
-function fillGalleryFromAPI(settings, profile) {
-  makeGetCardsRequest(settings)
-    .then((data) => {
-      const allCards = document.createDocumentFragment();
+function fillGalleryFromAPI(cardsResponse, profile) {
+  const allCards = document.createDocumentFragment();
 
-      data.forEach((card) => {
-        const newCard = createCard(
-          card._id,
-          card.link,
-          card.name,
-          card.likes,
-          card.owner,
-          profile._id
-        );
-        allCards.append(newCard);
-      });
-
-      galleryList.append(allCards);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
-fillProfileFromAPI(fetchSettings)
-  .then((data) => {
-    return fillGalleryFromAPI(fetchSettings, data);
+  cardsResponse.forEach((card) => {
+    const newCard = createCard(
+      card._id,
+      card.link,
+      card.name,
+      card.likes,
+      card.owner,
+      profile._id
+    );
+    allCards.append(newCard);
   });
+
+  galleryList.append(allCards);
+}
+
+Promise.all([
+  makeUserInfoRequest(fetchSettings),
+  makeGetCardsRequest(fetchSettings)
+])
+  .then((responses) => {
+    const profileResponse = responses[0];
+    const cardsResponse = responses[1];
+
+    fillProfileFromAPI(profileResponse);
+    fillGalleryFromAPI(cardsResponse, profileResponse);
+  })
+  .catch((error) => {
+    console.error(error);
+  })
