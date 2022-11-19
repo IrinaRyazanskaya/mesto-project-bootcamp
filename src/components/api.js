@@ -6,6 +6,14 @@ const fetchSettings = {
   }
 }
 
+function getResponseData(response) {
+  if (response.ok) {
+    return response.json();
+  }
+
+  return Promise.reject(`Ошибка: ${response.status}`);
+}
+
 function makeUserInfoRequest(settings) {
   return fetch(`${settings.baseUrl}/users/me`, {
     headers: {
@@ -13,11 +21,7 @@ function makeUserInfoRequest(settings) {
     }
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return getResponseData(response);
     });
 }
 
@@ -28,11 +32,7 @@ function makeGetCardsRequest(settings) {
     }
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return getResponseData(response);
     });
 }
 
@@ -46,11 +46,7 @@ function makeUpdateProfileRequest(settings, name, about) {
     })
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return getResponseData(response);
     });
 }
 
@@ -64,11 +60,7 @@ function makeAddNewCardRequest(settings, link, name) {
     })
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return getResponseData(response);
     });
 }
 
@@ -80,11 +72,7 @@ function makePutLikeRequest(settings, cardId) {
     }
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return getResponseData(response);
     });
 }
 
@@ -96,11 +84,7 @@ function makeDeleteLikeRequest(settings, cardId) {
     }
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return getResponseData(response);
     });
 }
 
@@ -113,11 +97,7 @@ function makeChangeAvatarRequest(settings, avatar) {
     })
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return getResponseData(response);
     });
 }
 
@@ -129,11 +109,7 @@ function makeDeleteCardRequest(settings, cardId) {
     }
   })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-
-      return Promise.reject(`Ошибка: ${response.status}`);
+      return getResponseData(response);
     });
 }
 
