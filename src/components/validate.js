@@ -1,5 +1,3 @@
-import { hasInvalidInput } from './utils.js';
-
 const formValidationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__field',
@@ -39,6 +37,12 @@ function checkInputValidity(validationSettings, formElement, inputElement) {
   }
 };
 
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
 function toggleButtonState(validationSettings, inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute('disabled', '');
@@ -67,10 +71,6 @@ function enableValidation(validationSettings) {
   const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
 
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-
     setEventListeners(validationSettings, formElement);
   });
 };
